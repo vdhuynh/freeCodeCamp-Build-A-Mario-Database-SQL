@@ -99,4 +99,3 @@ ALTER TABLE more_info ALTER COLUMN character_id SET NOT NULL;
 \d more_info
 SELECT character_id FROM characters;
 SELECT character_id, name FROM characters;
-

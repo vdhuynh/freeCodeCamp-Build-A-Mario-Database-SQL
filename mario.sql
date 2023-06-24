@@ -72,7 +72,31 @@ UPDATE characters SET name='Mario' WHERE character_id=1;
 SELECT * FROM characters;
 UPDATE characters SET favorite_color='Blue' WHERE character_id=4;
 UPDATE characters SET favorite_color='Yellow' WHERE character_id=7;
-UPDATE characters SET homeland='Koopa Kingdom' WHERE character_id=5;
+UPDATE characters SET homeland='Koopa Kingdom' WHERE character_id=7;
+ALTER TABLE characters ADD PRIMARY KEY(name);
 SELECT * FROM characters;
 SELECT * FROM characters ORDER BY character_id;
-ALTER 
+ALTER TABLE characters ADD PRIMARY KEY(name);
+\d characters
+ALTER TABLE characters DROP CONSTRAINT characters_pkey;
+\d characters
+ALTER TABLE characters ADD PRIMARY KEY(character_id);
+\d characters
+CREATE TABLE more_info();
+\d
+\d characters
+ALTER TABLE more_info ADD COLUMN more_info_id SERIAL;
+ALTER TABLE more_info ADD PRIMARY KEY(more_info_id);
+\d
+ALTER TABLE more_info ADD COLUMN birthday DATE;
+ALTER TABLE more_info ADD COLUMN height INT;
+ALTER TABLE more_info ADD COLUMN weight NUMERIC(4, 1);
+\d more_info
+ALTER TABLE more_info ADD COLUMN character_id INT REFERENCES characters(character_id);
+\d more_info
+ALTER TABLE more_info ADD UNIQUE(character_id);
+ALTER TABLE more_info ALTER COLUMN character_id SET NOT NULL;
+\d more_info
+SELECT character_id FROM characters;
+SELECT character_id, name FROM characters;
+

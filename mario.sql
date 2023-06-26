@@ -99,3 +99,24 @@ ALTER TABLE more_info ALTER COLUMN character_id SET NOT NULL;
 \d more_info
 SELECT character_id FROM characters;
 SELECT character_id, name FROM characters;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES ('1981-07-09', 155, 64.5, 1);
+SELECT * FROM more_info
+SELECT character_id, name FROM characters;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1983-07-14', 175, 48.8, 2);
+SELECT * FROM more_info;
+SELECT character_id, name FROM characters;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1985-10-18', 173, 52.2, 3);
+SELECT character_id, name FROM characters WHERE character_id=4;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1950-01-10', 66, 35.6, 4);
+SELECT * FROM more_info;
+SELECT character_id, name FROM characters WHERE character_id=5;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1990-10-29', 258, 300, 5);
+SELECT character_id, name FROM characters WHERE character_id=6;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1989-07-31', NULL, NULL, 6);
+SELECT * FROM more_info;
+SELECT character_id, name FROM characters WHERE character_id=7;
+INSERT INTO more_info(birthday, height, weight, character_id) VALUES('1990-04-13', 162, 59.1, 7);
+SELECT * FROM more_info;
+ALTER TABLE more_info RENAME COLUMN height TO height_in_cm;
+ALTER TABLE more_info RENAME COLUMN weight TO weight_in_kg;
+SELECT * FROM more_info;

@@ -120,3 +120,46 @@ SELECT * FROM more_info;
 ALTER TABLE more_info RENAME COLUMN height TO height_in_cm;
 ALTER TABLE more_info RENAME COLUMN weight TO weight_in_kg;
 SELECT * FROM more_info;
+CREATE TABLE sounds(sound_id SERIAL PRIMARY KEY);
+\d
+ALTER TABLE sounds ADD COLUMN filename VARCHAR(40) NOT NULL UNIQUE;
+ALTER TABLE sounds ADD COLUMN character_id INT NOT NULL REFERENCES characters(character_id);
+\d sounds
+SELECT * FROM characters ORDER BY character_id;
+INSERT INTO sounds(filename, character_id) VALUES('its-a-me.wav', 1);
+INSERT INTO sounds(filename, character_id) VALUES('yippee.wav', 1);
+INSERT INTO sounds(filename, character_id) VALUES('ha-ha.wav', 2);
+INSERT INTO sounds(filename, character_id) VALUES('oh-yeah.wav', 2);
+INSERT INTO sounds(filename, character_id) VALUES('yay.wav', 3), ('woo-hoo.wav', 3);
+INSERT INTO sounds(filename, character_id) VALUES('mm-hmm.wav', 3), ('yahoo.wav', 1);
+SELECT * FROM sounds;
+CREATE TABLE actions(action_id SERIAL PRIMARY KEY);
+ALTER TABLE actions ADD COLUMN action VARCHAR(20) UNIQUE NOT NULL;
+INSERT INTO actions(action) VALUES('run');
+INSERT INTO actions(action) VALUES('jump');
+INSERT INTO actions(action) VALUES('duck');
+SELECT * FROM actions;
+CREATE TABLE character_actions();
+ALTER TABLE character_actions ADD COLUMN character_id INT NOT NULL;
+ALTER TABLE character_actions ADD FOREIGN KEY(character_id) REFERENCES characters(character_id);
+\d character_actions
+ALTER TABLE character_actions ADD COLUMN action_id INT NOT NULL;
+ALTER TABLE character_actions ADD FOREIGN KEY(action_id) REFERENCES actions(action_id);
+\d character_actions
+ALTER TABLE character_actions ADD PRIMARY KEY(character_id, action_id);
+\d character_actions
+INSERT INTO character_actions(character_id, action_id) VALUES(7,1), (7,2), (7,3);
+SELECT * FROM character_actions;
+INSERT INTO character_actions(character_id, action_id) VALUES(6,1), (6,2), (6,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(5,1), (5,2), (5,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(4,1), (4,2), (4,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(3,1), (3,2), (3,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(2,1), (2,2), (2,3);
+INSERT INTO character_actions(character_id, action_id) VALUES(1,1), (1,2), (1,3);
+SELECT * FROM character_actions;
+\d
+SELECT * FROM characters;
+SELECT * FROM more_info;
+SELECT * FROM characters FULL JOIN more_info ON characters.character_id = more_info.character_id;
+SELECT * FROM characters FULL JOIN sounds ON characters.character_id = sounds.character_id;
+SELECT * FROM character_actions FULL JOIN characters ON character_actions.character_id = characters.character_id FULL JOIN actions ON character_actions.action_id = actions.action_id;
